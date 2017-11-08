@@ -1,0 +1,7 @@
+[07-Nov-2017 11:23:02 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/20160303/curl.so' - /usr/lib/php/20160303/curl.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[07-Nov-2017 11:26:56 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/20160303/curl.so' - /usr/lib/php/20160303/curl.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[07-Nov-2017 11:27:24 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/20160303/curl.so' - /usr/lib/php/20160303/curl.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[07-Nov-2017 11:28:10 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/20160303/curl.so' - /usr/lib/php/20160303/curl.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[07-Nov-2017 11:30:18 UTC] PHP Warning:  Module 'curl' already loaded in Unknown on line 0
+[07-Nov-2017 11:30:57 UTC] PHP Warning:  Module 'curl' already loaded in Unknown on line 0
+[08-Nov-2017 05:51:52 UTC] PHP Warning:  Module 'curl' already loaded in Unknown on line 0
