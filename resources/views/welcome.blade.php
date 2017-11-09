@@ -4,8 +4,7 @@
     <div class="cover">
         <div class="cover-inner">
             <div class="cover-contents">
-                <h1>素敵なモノと出会う場所</h1>
-                <a href="" class="btn btn-success btn-lg">モノリストを始める</a>
+                <h1>素敵なアニメと出会う場所</h1>
             </div>
         </div>
     </div>
@@ -186,10 +185,14 @@ foreach($animeList as $anime){
 	$html .= '<small style="display:block; border-top:1px solid #555; padding-top:12px; margin-top:72px; text-align:center; font-weight:700;">プログラムの説明: <a href="https://syncer.jp/Web/API/Twitter/REST_API/GET/users/lookup/" target="_blank">SYNCER</a></small>' ;
 
 	// 出力 (本稼働時はHTMLのヘッダー、フッターを付けよう)
-// 	echo $html ;
+	echo $html ;
 
+	echo "<pre>";
+	print_r($obj);
+	echo "</pre>";
 
 ?>
+
 
     @foreach($obj as $key => $val)
         <img src = "{{ $obj[$key]->profile_image_url }}">

@@ -5,3 +5,4 @@
 [07-Nov-2017 11:30:18 UTC] PHP Warning:  Module 'curl' already loaded in Unknown on line 0
 [07-Nov-2017 11:30:57 UTC] PHP Warning:  Module 'curl' already loaded in Unknown on line 0
 [08-Nov-2017 05:51:52 UTC] PHP Warning:  Module 'curl' already loaded in Unknown on line 0
+[09-Nov-2017 18:34:41 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 94375936 bytes) in /home/ubuntu/workspace/anime/app/Http/Controllers/M_itemsController.php on line 54

@@ -15,6 +15,9 @@
                     @endif
 
                     You are logged in!
+                    <a href="{{ route('m_items.create') }}">
+                        アイテムを追加
+                    </a>
                 </div>
             </div>
         </div>
