@@ -17,32 +17,23 @@ class M_itemsController extends Controller
         $year = 2017;
         $season = 4;
         
-        // (1) shangrilla...api からとりあえず一通り取得
+        // (1) shangrilla...api からひと通り取得
         $sha_api_data = $this->shangrila_anime_api($year, $season);
 
-        // (2) twitter_apiに投げる前にパラメータ準備
-        $param = $this->get_twwiter_param($sha_api_data, 'twitter_account');
-        
-        // (3) twitter_apiから追加情報を取得
-        $twi_api_data = $this->twitter_api($param);
+        // (2) twitter_apiから追加情報を取得
+        $twi_api_data = $this->twitter_api($sha_api_data);
 
-        // (1), (3)を結合
+        // (1), (2)を結合
         $anime_data = $this->fArray_merge( $sha_api_data, $twi_api_data );
         
-        echo "<pre>";
-        print_r($anime_data);
-        echo "</pre>";
-
+        try{
             $cli = DB::table('m_items')
-                    -> insert($anime_data[2]);
-        // try{
-        //     $cli = DB::table('m_items')
-        //             -> insert($anime_data);
-        // }catch(\Exception $e) {
-        //     // てけとー
-        //     echo 'データのinsertに失敗しました。';
-        //     exit;
-        // }
+                    -> insert($anime_data);
+        }catch(\Exception $e) {
+            // てけとー
+            echo 'データのinsertに失敗しました。';
+            exit;
+        }
 
         return view('admin.home');
     }
@@ -53,7 +44,9 @@ class M_itemsController extends Controller
         /**************************************************
         
         	ShangriLa Anime API V1
-        	ドキュメント: https://qiita.com/AKB428/items/64938febfd4dcf6ea698
+        	desc    : https://qiita.com/AKB428/items/64938febfd4dcf6ea698
+                      基本データはここで取得する
+        	return  : 多次元連想配列
     
         **************************************************/    
 
@@ -87,30 +80,14 @@ class M_itemsController extends Controller
         return $array;
     }
     
-    private function get_twwiter_param ($arrays, $target)
-    { 
-        $param = [];
-        foreach ($arrays as $array) {
-            foreach($array as $key => $value) {
-                if ($key === $target) {
-                    $param[] = $value;
-                }
-            }
-        }
-        $param_result = implode(',', $param);
-        
-        return $param_result;
-    }
-
-
-    private function twitter_api($param)
+    private function twitter_api($sha_api_data)
     {
-
          /**************************************************
         
         	Twitter API
-        	参考: https://syncer.jp/Web/API/Twitter/REST_API/GET/users/profile_banner/
-    
+        	desc    : https://syncer.jp/Web/API/Twitter/REST_API/GET/users/profile_banner/
+        	return  : 多次元連想配列
+
         **************************************************/    
 
         // 設定
@@ -120,10 +97,13 @@ class M_itemsController extends Controller
     	$access_token_secret = env('TWITTER_ACCESS_TOKEN_SECRET') ;		// アクセストークンシークレット
     	$request_url = 'https://api.twitter.com/1.1/users/lookup.json' ;		// エンドポイント
     	$request_method = 'GET' ;
-    
+
+        // パラメータ生成
+        $param_scname = $this->get_twwiter_param($sha_api_data, 'twitter_account');
+        
     	// パラメータA (オプション)
     	$params_a = array(
-    		"screen_name" => $param,
+    		"screen_name" => $param_scname,
     	) ;
     
     	// キーを作成する (URLエンコードする)
@@ -208,28 +188,55 @@ class M_itemsController extends Controller
     	$json = substr( $res1, $res2['header_size'] ) ;		// 取得したデータ(JSONなど)
     	$header = substr( $res1, 0, $res2['header_size'] ) ;	// レスポンスヘッダー (検証に利用したい場合にどうぞ)
     
-    	// JSONをオブジェクトに変換
-    	$obj = json_decode( $json ) ;
-
+    	// JSONを連想配列に変換
+    	$obj = json_decode( $json, true) ;
+    	
+        // 必要なデータだけ取り出す
         $twitter_data = [];
-        foreach($obj as $array) {
-            $temp = [];
+        foreach($obj as $ikey => $array) {
+            // bannerが取れなかったデータの補完
+            if (!array_key_exists ('profile_banner_url', $array)) {
+                $obj[$ikey]['profile_banner_url'] = '';
+            }
+            // bannerだけ
+            $twitter_data[]['profile_banner_url'] = $obj[$ikey]['profile_banner_url'];
+        }
+
+    	return $twitter_data;
+
+    }
+    
+    
+    private function get_twwiter_param ($data, $target)
+    {
+        /**************************************************
+        
+        	twitter_api用パラメータ生成
+        	desc    : (string1,string2,string3...)
+        	return  : String
+    
+        **************************************************/
+        $param = [];
+        foreach ($data as $array) {
             foreach($array as $key => $value) {
-                if ($key === 'profile_banner_url') {
-                    $temp += array($key => $value);
+                if ($key === $target) {
+                    $param[] = $value;
                 }
             }
-            $twitter_data[] = $temp;
         }
-    	
-    	return $twitter_data;
+        $param_result = implode(',', $param);
+
+        return $param_result;
     }
+
+
     
     private function fArray_merge( $aOld, $aNew ){
          /**************************************************
         
         	多次元連想配列同士のマージ
-        	参考: http://designhack.slashlab.net/php-note-for-merge-multidimensional-associative-arrays/
+        	desc    : http://designhack.slashlab.net/php-note-for-merge-multidimensional-associative-arrays/
+        	return  : 多次元連想配列
     
         **************************************************/    
 

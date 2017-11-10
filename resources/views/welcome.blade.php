@@ -53,7 +53,7 @@ foreach($animeList as $anime){
 	// パラメータA (オプション)
 	$params_a = array(
 //		"user_id" => "1528352858,2905085521",
-		"screen_name" => "shokugeki_anime,syncerjp",
+		"screen_name" => "shokugeki_anime,LoveLive_staff",
 //		"include_entities" => "true",
 	) ;
 
@@ -197,7 +197,9 @@ foreach($animeList as $anime){
     @foreach($obj as $key => $val)
         <img src = "{{ $obj[$key]->profile_image_url }}">
         <img src = "{{ $obj[$key]->profile_image_url_https }}">
+        {{--
         <img src = "{{ $obj[$key]->profile_banner_url }}">
+        --}}
     @endforeach
     
 @endsection
