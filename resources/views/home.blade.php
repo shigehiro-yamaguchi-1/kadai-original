@@ -1,23 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.default')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
+@section('cover')
+    <div class="cover">
+        <div class="cover-inner">
+            <div class="cover-contents">
+                <h1>素敵なアニメと出会う場所</h1>
             </div>
         </div>
     </div>
-</div>
+@endsection
+
+@section('content')
+
+    @foreach($items as $key => $item)
+        <div>
+            {{ $items[$key]->title }}
+            <img src = "{{ $items[$key]->profile_image_url }}">
+            <!--<img src = "{{ $items[$key]->profile_banner_url }}">-->
+        </div>
+    @endforeach
+
 @endsection

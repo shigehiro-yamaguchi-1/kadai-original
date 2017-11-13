@@ -19,10 +19,11 @@ class CreateMItemsTable extends Migration
             $table->string('title_short1');
             $table->string('title_short2');
             $table->string('title_short3');
-            $table->string('public_url', 2083)->default('');
+            $table->string('public_url', 2083);
             $table->string('twitter_account');
             $table->string('twitter_hash_tag');
-            $table->string('profile_banner_url', 2083)->default('');
+            $table->string('profile_image_url', 2083);
+            $table->string('profile_banner_url', 2083);
             $table->integer('year')->unsigned();
             $table->integer('season')->unsigned();
             $table->integer('cours_id')->unsigned();

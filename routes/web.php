@@ -21,7 +21,10 @@ Auth::routes();
 |--------------------------------------------------------------------------
 */
 // Route::get('/', function () { return redirect('/home'); });
+    // Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/', 'WelcomeController@index');
+Route::get('detail/{id}', 'ItemUserController@show')->name('item_user.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +33,14 @@ Route::get('/', 'WelcomeController@index');
 */
 Route::group(['middleware' => 'auth:user'], function() {
     Route::get('/home', 'HomeController@index')->name('home');
+    
+    // high_rate
+    Route::post('high_rate', 'ItemUserController@high_rate')->name('item_user.high_rate');
+    Route::delete('high_rate', 'ItemUserController@dont_high_rate')->name('item_user.dont_high_rate');
+
+    // low_rate
+    Route::post('low_rate', 'ItemUserController@low_rate')->name('item_user.low_rate');
+    Route::delete('low_rate', 'ItemUserController@dont_low_rate')->name('item_user.dont_low_rate');
 });
  
 /*
@@ -42,7 +53,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('login',     'Admin\LoginController@showLoginForm')->name('admin.login');
     Route::post('login',    'Admin\LoginController@login');
 });
- 
+
 /*
 |--------------------------------------------------------------------------
 | 4) Admin ログイン後

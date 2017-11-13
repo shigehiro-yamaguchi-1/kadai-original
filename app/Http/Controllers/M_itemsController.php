@@ -25,7 +25,20 @@ class M_itemsController extends Controller
 
         // (1), (2)を結合
         $anime_data = $this->fArray_merge( $sha_api_data, $twi_api_data );
-        
+
+// #### test ##############
+// $test_data = [];
+// for($i=0;$i<1;$i++){
+//     $test_data[] = $anime_data[$i];
+// }
+//             $cli = DB::table('m_items')
+//                     -> insert($test_data);
+
+// exit;
+// #### test ##############
+
+
+
         try{
             $cli = DB::table('m_items')
                     -> insert($anime_data);
@@ -193,14 +206,24 @@ class M_itemsController extends Controller
     	
         // 必要なデータだけ取り出す
         $twitter_data = [];
-        foreach($obj as $ikey => $array) {
-            // bannerが取れなかったデータの補完
-            if (!array_key_exists ('profile_banner_url', $array)) {
-                $obj[$ikey]['profile_banner_url'] = '';
-            }
-            // bannerだけ
-            $twitter_data[]['profile_banner_url'] = $obj[$ikey]['profile_banner_url'];
+        foreach($obj as $key => $array) {
+            // 取れなかったデータの補完
+            if (!array_key_exists ('profile_banner_url', $array)) { $obj[$key]['profile_banner_url'] = '';  }
+            // image系だけ
+            $twitter_data[] = array(
+                                    'profile_image_url' => $obj[$key]['profile_image_url'],
+                                    'profile_banner_url' => $obj[$key]['profile_banner_url'],
+                                    );
         }
+
+// #### test ##############
+
+// echo '<pre>';
+// print_r($twitter_data);
+// echo '</pre>';
+// exit;
+
+// #### test ##############
 
     	return $twitter_data;
 
@@ -249,5 +272,6 @@ class M_itemsController extends Controller
         }
         return($aOld);
     }
+    
     
 }
