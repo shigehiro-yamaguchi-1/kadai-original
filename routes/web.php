@@ -20,7 +20,7 @@ Auth::routes();
 | 1) User 認証不要
 |--------------------------------------------------------------------------
 */
-// Route::get('/', function () { return redirect('/home'); });
+Route::get('/home', function () { return redirect('/'); });
     // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'WelcomeController@index');
@@ -32,7 +32,7 @@ Route::get('detail/{id}', 'ItemUserController@show')->name('item_user.show');
 |--------------------------------------------------------------------------
 */
 Route::group(['middleware' => 'auth:user'], function() {
-    Route::get('/home', 'HomeController@index')->name('home');
+    // Route::get('/home', 'HomeController@index')->name('home');
     
     // high_rate
     Route::post('high_rate', 'ItemUserController@high_rate')->name('item_user.high_rate');
