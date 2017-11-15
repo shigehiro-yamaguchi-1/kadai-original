@@ -24,6 +24,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        // formのselect用
+        $years = \Config::get('anime_item.years');
+        $seasons = \Config::get('anime_item.seasons');;
+        
+        $data = [
+            'years' => $years,
+            'seasons' => $seasons,
+        ];
+        
+        return view('admin.home', $data);
     }
+
+    public function postIndex()
+    {
+        $test = \Artisan::call("createranking");
+        var_dump($test);
+        
+        return redirect()->back();
+    }
+
 }

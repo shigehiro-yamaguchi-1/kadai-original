@@ -18,7 +18,7 @@ class M_item extends Model
     // #################
     public function high_rate_users()
     {
-        return $this->users()->where('type', \Config::get('type.high_rate'));
+        return $this->users()->where('type', \Config::get('anime_type.high_rate'));
     }
 
     // #################
@@ -26,7 +26,7 @@ class M_item extends Model
     // #################
     public function low_rate_users()
     {
-        return $this->users()->where('type', \Config::get('type.low_rate'));
+        return $this->users()->where('type', \Config::get('anime_type.low_rate'));
     }
 
 }

@@ -21,7 +21,7 @@ class CreateSeasonRankingDatasTable extends Migration
             $table->integer('score');
             $table->integer('item_id')->unsigned();
             $table->string('title');
-            $table->string('profile_image', 2083);
+            $table->string('profile_image_url', 2083);
             $table->integer('high_rate');
             $table->integer('low_rate');
             $table->timestamps();

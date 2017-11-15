@@ -15,9 +15,8 @@
                     @endif
 
                     You are logged in!
-                    <a href="{{ route('m_items.create') }}">
-                        アイテムを追加
-                    </a>
+                    @include('admin.items.create_m_items_button')
+                    @include('admin.items.create_ranking_button')
                 </div>
             </div>
         </div>

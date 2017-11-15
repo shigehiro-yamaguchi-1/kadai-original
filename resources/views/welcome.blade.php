@@ -11,14 +11,20 @@
 @endsection
 
 @section('content')
+    
 
-    @foreach($items as $key => $item)
+    @include('items.select_year_season')
+
+    @foreach($rankings as $key => $ranking)
         <div>
-            <img src = "{{ $items[$key]->profile_image_url }}">
-            {!! link_to_route('item_user.show', $item->title, ['id' => $item->id]) !!}
-            {{$item->counts['count_high_rates']}}
-            {{$item->counts['count_low_rates']}}
-            <!--<img src = "{{ $items[$key]->profile_banner_url }}">-->
+            {{$ranking->rank}}
+            {{$ranking->score}}
+            <img src = "{{ $ranking->profile_image_url }}">
+            
+            {!! link_to_route('item_user.show', $ranking->title, ['id' => $ranking->item_id]) !!}
+            {{$ranking->high_rate}}
+            {{$ranking->low_rate}}
+            <!--<img src = "{{ $ranking->profile_banner_url }}">-->
         </div>
     @endforeach
 

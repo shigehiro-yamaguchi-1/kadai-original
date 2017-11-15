@@ -23,7 +23,8 @@ Auth::routes();
 Route::get('/home', function () { return redirect('/'); });
     // Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'WelcomeController@index')->name('get.home');
+Route::post('/', 'WelcomeController@index')->name('post.home');
 Route::get('detail/{id}', 'ItemUserController@show')->name('item_user.show');
 
 /*
@@ -62,5 +63,6 @@ Route::group(['prefix' => 'admin'], function() {
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::post('logout',   'Admin\LoginController@logout')->name('admin.logout');
     Route::get('home',      'Admin\HomeController@index')->name('admin.home');
-    Route::resource('m_items', 'M_itemsController', ['only' => ['create']]);
+    Route::post('home',      'Admin\HomeController@postIndex')->name('admin.post.home');
+    Route::resource('m_items', 'Admin\M_itemsController', ['only' => ['store']]);
 });

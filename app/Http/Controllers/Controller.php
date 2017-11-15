@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
-    public function counts($item) {
+    public static function counts($item) {
         $count_high_rates = $item->high_rate_users()->count();
         $count_low_rates = $item->low_rate_users()->count();
         

@@ -14,3 +14,12 @@
 [13-Nov-2017 01:58:13 UTC] PHP Warning:  Module 'curl' already loaded in Unknown on line 0
 [13-Nov-2017 16:19:31 Asia/Tokyo] PHP Fatal error:  Cannot redeclare App\Http\Controllers\ItemUserController::dont_high_rate() in /home/ubuntu/workspace/anime/app/Http/Controllers/ItemUserController.php on line 45
 [13-Nov-2017 17:46:45 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 98570240 bytes) in /home/ubuntu/workspace/anime/app/Http/Controllers/WelcomeController.php on line 25
+[14-Nov-2017 06:51:56 UTC] PHP Warning:  Module 'curl' already loaded in Unknown on line 0
+[14-Nov-2017 18:48:11 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 80240640 bytes) in /home/ubuntu/workspace/anime/app/Http/Controllers/WelcomeController.php on line 16
+[14-Nov-2017 20:30:25 Asia/Tokyo] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 79106048 bytes) in /home/ubuntu/workspace/anime/app/Http/Controllers/WelcomeController.php on line 14
+[15-Nov-2017 02:09:04 UTC] PHP Warning:  Module 'curl' already loaded in Unknown on line 0
+[15-Nov-2017 12:14:21 Asia/Tokyo] PHP Fatal error:  Class 'App\Http\Controllers\Admin\Controller' not found in /home/ubuntu/workspace/anime/app/Http/Controllers/Admin/M_itemsController.php on line 10
+[15-Nov-2017 12:14:41 Asia/Tokyo] PHP Fatal error:  Class 'App\Http\Controllers\Admin\Controller' not found in /home/ubuntu/workspace/anime/app/Http/Controllers/Admin/M_itemsController.php on line 10
+[15-Nov-2017 04:42:37 UTC] PHP Warning:  Module 'curl' already loaded in Unknown on line 0
+[15-Nov-2017 04:44:08 UTC] PHP Warning:  Module 'curl' already loaded in Unknown on line 0
+[15-Nov-2017 04:45:31 UTC] PHP Warning:  Module 'curl' already loaded in Unknown on line 0

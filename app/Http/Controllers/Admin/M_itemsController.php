@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\M_item;
@@ -9,14 +10,15 @@ use Carbon\Carbon;
 
 class M_itemsController extends Controller
 {
-    public function create()
+    public function store()
     {
-        // $year = request()->year;
-        // $season = request()->cours;
-        // ToDo
-        $year = 2017;
-        $season = 4;
+        $year = request()->year;
+        $season = request()->season;
         
+        if ($year == '' || $season == '' ) {
+            return redirect()->back();
+        }
+
         // (1) shangrilla...api からひと通り取得
         $sha_api_data = $this->shangrila_anime_api($year, $season);
 
@@ -45,10 +47,9 @@ class M_itemsController extends Controller
         }catch(\Exception $e) {
             // てけとー
             echo 'データのinsertに失敗しました。';
-            exit;
         }
 
-        return view('admin.home');
+        return redirect()->back();
     }
     
     private function shangrila_anime_api($year, $season)

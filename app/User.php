@@ -41,7 +41,7 @@ class User extends Authenticatable
     // #################
     public function high_rate_items()
     {
-        return $this->items()->where('type', \Config::get('type.high_rate'));
+        return $this->items()->where('type', \Config::get('anime_type.high_rate'));
     }
     
     public function high_rate($itemId)
@@ -54,7 +54,7 @@ class User extends Authenticatable
             return false;
         } else {
             // 未high_rateであればhigh_rateする
-            $this->items()->attach($itemId, ['type' => \Config::get('type.high_rate')]);
+            $this->items()->attach($itemId, ['type' => \Config::get('anime_type.high_rate')]);
             
             // 既にbad_rateであればdetachする
             $this->dont_low_rate($itemId);
@@ -70,7 +70,7 @@ class User extends Authenticatable
         
         if ($exist) {
             // 既にhigh_rateしていればhigh_rateを外す
-            \DB::delete("DELETE FROM item_evaluate WHERE user_id = ? AND item_id = ? AND type = ?", [\Auth::user()->id, $itemId, \Config::get('type.high_rate')]);
+            \DB::delete("DELETE FROM item_evaluate WHERE user_id = ? AND item_id = ? AND type = ?", [\Auth::user()->id, $itemId, \Config::get('anime_type.high_rate')]);
             return true;
         } else {
             // 未high_rateであれば何もしない
@@ -88,7 +88,7 @@ class User extends Authenticatable
     // #################
     public function low_rate_items()
     {
-        return $this->items()->where('type', \Config::get('type.low_rate'));
+        return $this->items()->where('type', \Config::get('anime_type.low_rate'));
     }
     
     public function low_rate($itemId)
@@ -101,7 +101,7 @@ class User extends Authenticatable
             return false;
         } else {
             // 未low_rateであればlow_rateする
-            $this->items()->attach($itemId, ['type' => \Config::get('type.low_rate')]);
+            $this->items()->attach($itemId, ['type' => \Config::get('anime_type.low_rate')]);
 
             // 既にhigh_rateであればdetachする
             $this->dont_high_rate($itemId);
@@ -117,7 +117,7 @@ class User extends Authenticatable
         
         if ($exist) {
             // 既にlow_rateしていればlow_rateを外す
-            \DB::delete("DELETE FROM item_evaluate WHERE user_id = ? AND item_id = ? AND type = ?", [\Auth::user()->id, $itemId, \Config::get('type.low_rate')]);
+            \DB::delete("DELETE FROM item_evaluate WHERE user_id = ? AND item_id = ? AND type = ?", [\Auth::user()->id, $itemId, \Config::get('anime_type.low_rate')]);
             return true;
         } else {
             // 未low_rateであれば何もしない
