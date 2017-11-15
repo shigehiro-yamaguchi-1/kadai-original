@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Illuminate\Database\Eloquent\Model;
+use App\SocialProvider;
 
 
 class User extends Authenticatable
@@ -130,5 +131,9 @@ class User extends Authenticatable
         return $this->low_rate_items()->where('item_id', $itemId)->exists();
     }
 
+    public function socialProviders()
+    {
+        return $this->hasMany(SocialProvider::class);
+    }
     
 }
