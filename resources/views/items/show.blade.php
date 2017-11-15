@@ -10,7 +10,7 @@
                 公式サイト：<a href={{$item->public_url}} target="_blank">{{$item->public_url}}</a>
                 {{-- 評価領域 --}}
                 @guest
-                    <p>ユーザー登録するとこのアニメを評価することができます！</p>
+                    <p><a href={{ url('/login') }}>ログイン</a>すると、アニメを評価することができます！</p>
                 @else
                     <div class="form-inline">
                         <div class="form-group">
