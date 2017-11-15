@@ -14,7 +14,16 @@
 
 
 Auth::routes();
-
+//Twitter
+Route::get('auth/twitter', 'Auth\OAuthLoginController@getAuth');
+Route::get('auth/callback/twitter', 'Auth\OAuthLoginController@authCallback');
+//Facebook
+Route::get('auth/facebook', 'Auth\OAuthLoginController@getAuth');
+Route::get('auth/callback/facebook', 'Auth\OAuthLoginController@authCallback');
+//Google
+Route::get('auth/google', 'Auth\OAuthLoginController@getAuth');
+Route::get('auth/callback/google', 'Auth\OAuthLoginController@authCallback');
+ 
 /*
 |--------------------------------------------------------------------------
 | 1) User 認証不要
