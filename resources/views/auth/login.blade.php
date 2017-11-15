@@ -60,21 +60,25 @@
                                 </a>
                             </div>
                         </div>
-                        
+
                         <!-- ソーシャルログイン -->
-                        <a class="btn btn-block btn-social btn-twitter"  href="auth/twitter">
-                            <span class="fa fa-twitter"></span> Sign in with Twitter
-                        </a>
-                        
-                        <!--<a class="btn btn-block btn-social btn-facebook" href="auth/facebook">-->
-                        <!--    <span class="fa fa-facebook"></span> Sign in with Facebook-->
-                        <!--</a>-->
-                        
-                        <a class="btn btn-block btn-social btn-google"  href="auth/google">
-                            <span class="fa fa-google"></span> Sign in with Google
-                        </a>
+                        <div class="form-group">
+                            <div class="col-md-4 col-md-offset-4">
+                                <a class="btn btn-block btn-social btn-twitter"  href="auth/twitter">
+                                    <span class="fa fa-twitter"></span> Sign in with Twitter
+                                </a>
+                                
+                                <!--<a class="btn btn-block btn-social btn-facebook" href="auth/facebook">-->
+                                <!--    <span class="fa fa-facebook"></span> Sign in with Facebook-->
+                                <!--</a>-->
+                                
+                                <a class="btn btn-block btn-social btn-google"  href="auth/google">
+                                    <span class="fa fa-google"></span> Sign in with Google
+                                </a>
+                            </div>
+                        </div>
                         <!-- /ソーシャルログイン -->
-                        
+
                     </form>
                 </div>
             </div>
