@@ -28,5 +28,10 @@ class M_item extends Model
     {
         return $this->users()->where('type', \Config::get('anime_type.low_rate'));
     }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 
 }

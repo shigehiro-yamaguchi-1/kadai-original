@@ -136,4 +136,8 @@ class User extends Authenticatable
         return $this->hasMany(SocialProvider::class);
     }
     
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

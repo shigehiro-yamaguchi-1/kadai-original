@@ -14,6 +14,9 @@
 
 
 Auth::routes();
+// モデルとの結合
+Route::model('item', 'App\M_item');
+
 //Twitter
 Route::get('auth/twitter', 'Auth\OAuthLoginController@getAuth');
 Route::get('auth/callback/twitter', 'Auth\OAuthLoginController@authCallback');
@@ -34,7 +37,7 @@ Route::get('/home', function () { return redirect('/'); });
 
 Route::get('/', 'WelcomeController@index')->name('get.home');
 Route::post('/', 'WelcomeController@index')->name('post.home');
-Route::get('detail/{id}', 'ItemUserController@show')->name('item_user.show');
+Route::get('detail/{id}', 'ItemController@show')->name('item.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -45,12 +48,15 @@ Route::group(['middleware' => 'auth:user'], function() {
     // Route::get('/home', 'HomeController@index')->name('home');
     
     // high_rate
-    Route::post('high_rate', 'ItemUserController@high_rate')->name('item_user.high_rate');
-    Route::delete('high_rate', 'ItemUserController@dont_high_rate')->name('item_user.dont_high_rate');
+    Route::post('high_rate', 'ItemController@high_rate')->name('item.high_rate');
+    Route::delete('high_rate', 'ItemController@dont_high_rate')->name('item.dont_high_rate');
 
     // low_rate
-    Route::post('low_rate', 'ItemUserController@low_rate')->name('item_user.low_rate');
-    Route::delete('low_rate', 'ItemUserController@dont_low_rate')->name('item_user.dont_low_rate');
+    Route::post('low_rate', 'ItemController@low_rate')->name('item.low_rate');
+    Route::delete('low_rate', 'ItemController@dont_low_rate')->name('item.dont_low_rate');
+    
+    // コメント投稿
+    Route::post('detail/{item}', 'CommentController@newComment')->name('comment.new');
 });
  
 /*
