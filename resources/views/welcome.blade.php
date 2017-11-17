@@ -4,7 +4,7 @@
     <div class="cover">
         <div class="cover-inner">
             <div class="cover-contents">
-                <h1>素敵なアニメと出会う場所</h1>
+                <h1 class="text-center">素敵なアニメと出会う場所</h1>
             </div>
         </div>
     </div>

@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 @else
-                    <h2>{{$item->title}}にコメントはありません</h2>
+                    <h2>コメントはありません</h2>
                 @endif
                 <div class="text-right">
                     @guest
