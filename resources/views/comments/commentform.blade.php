@@ -5,6 +5,6 @@
                                             'placeholder' => 'コメントを書く（50文字まで）'
                                         ]) !!}
     {!! Form::hidden('comment_user_id', \Auth::user()->id ) !!}
-    {!! Form::submit('送信', ['class' => 'btn btn-success']) !!}
+    {!! Form::button('<i class="glyphicon glyphicon-arrow-up"></i> 送信', array('type' => 'submit', 'class' => 'btn btn-success')) !!}
     {{ csrf_field() }}
 {!! Form::close() !!}

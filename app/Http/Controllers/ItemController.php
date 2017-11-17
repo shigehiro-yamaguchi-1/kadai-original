@@ -13,7 +13,7 @@ class ItemController extends Controller
     {
         $item = M_item::find($id);
 
-        $comments = $item->comments()->orderBy('created_at', 'DESC')->paginate(20);
+        $comments = $item->comments()->orderBy('created_at', 'DESC')->paginate(5);
         
         foreach ($comments as $comment) {
             $user = User::find($comment->user_id);
@@ -23,10 +23,12 @@ class ItemController extends Controller
         $data = [
             'item' => $item,
             'comments' => $comments,
+            'high_rate_name' => '<i class="glyphicon glyphicon-thumbs-up"></i> ' . \Config::get('anime_type.high_rate_name'),
+            'low_rate_name' => '<i class="glyphicon glyphicon-thumbs-down"></i> ' . \Config::get('anime_type.low_rate_name'),
         ];
 
         $data += $this->counts($item);
-      
+
         return view('items.show', $data);
     }
     

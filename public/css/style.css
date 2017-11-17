@@ -1,6 +1,144 @@
 @charset "utf-8";
 
+
+/* スクリーンサイズごとにフォントをリサイズ */
+html {
+  font-size: 62.5%;
+}
+h1 {
+    font-size: 1.4em;
+}
+
+@media (min-width: 768px) {
+    h1 {
+        font-size: 1.6em;
+    }
+}
+
+@media (min-width: 992px) {
+    h1 {
+        font-size: 1.8em;
+    }
+}
+
+@media (min-width: 1200px) {
+    h1 {
+        font-size: 2em;
+    }
+}
+
+h1 {
+    text-align: center;
+}
+
+
+/*バナーイメージサイズ*/
 .banner_image {
     width: 100%;
     height: 100%;
+}
+
+
+/*テーブルスクロール*/
+/*
+.scroll_box {
+    height: 1000px;
+    overflow: auto;
+    border: 1px solid #aaa;
+    padding: 10px;
+}
+*/
+
+table.table-headerfixed {
+/*    width: 100%;*/
+}
+
+table.table-headerfixed thead,
+table.table-headerfixed tbody,
+table.table-headerfixed tr,
+table.table-headerfixed td,
+table.table-headerfixed th {
+    display: block;
+}
+
+table.table-headerfixed tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+table.table-headerfixed tbody {
+    height: 1000px;
+    overflow-y: scroll;
+}
+
+table.table-headerfixed thead {
+    /* fallback */
+    width: 97%;
+    /* minus scroll bar width */
+    width: calc(100% - 17px);
+}
+
+table.table-headerfixed tbody td,
+table.table-headerfixed thead th {
+    float: left;
+    height: 38px;
+}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/*セレクトボックス*/
+.select-wrap{
+position:relative;
+overflow:hidden;
+display:inline-block;
+min-width:192px;
+min-width:12em;
+background-color:#ffffff;
+background-image:-webkit-linear-gradient(top, #ffffff 0%, #dfe0d9 100%);
+background-image:linear-gradient(top, #ffffff 0%, #dfe0d9 100%);
+border:1px solid #c0c0c0;
+color:#333;
+}
+
+.select-wrap select{
+-webkit-appearance:none;
+-moz-appearance:none;
+appearance:none;
+position:relative;
+z-index:2;
+display:block;
+width:200%;/* fallback non calc support */
+width:-webkit-calc(100% + 5em);
+margin:0;
+padding:11px 35px 11px 11px;
+padding:.6875rem 2.1875rem .6875rem .6875rem;
+background:transparent;
+border:0;
+outline:none;
+font-size:16px;
+font-size:1rem;
+line-height:1.5;
+}
+
+.entypo-down-open-mini:before{
+/* content:''; 今回のサンプルはCDNを使っているため指定していないけど指定する必要があります。 */
+font-family:'entypo',sans-serif;
+position:absolute;
+z-index:1;
+top:50%;
+right:12px;
+right:.75rem;
+margin-top:-8px;
+margin-top:-.5rem;
+font-size:16px;
+font-size:1rem;
+line-height:1;
+color:#333;
 }
