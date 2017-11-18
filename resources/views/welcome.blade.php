@@ -20,7 +20,7 @@
             <br>ならフレンドチャット欲しいなぁ
             <br>自分が見てるアニメ（＝評価したアニメ）を見せ合いっこしたら面白そうだなぁ
         </div>
-
+        
         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
             @include('items.select_year_season')
             <p class="text-right">※ランキングは一定時間毎に更新されます。</p>
@@ -31,8 +31,8 @@
                             <th width="10%" class="text-center">Rank</th>
                             <th width="10%" class="text-center">Score</th>
                             <th width="60%" class="text-center">title</th>
-                            <th width="10%" class="text-center">good</th>
-                            <th width="10%" class="text-center">bad</th>
+                            <th width="10%" class="text-center">{!!$high_rate_name!!}</th>
+                            <th width="10%" class="text-center">{!!$low_rate_name!!}</th>
                         </tr>
                     </thead>
                     <tbody>

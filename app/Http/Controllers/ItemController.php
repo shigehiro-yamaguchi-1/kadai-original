@@ -20,11 +20,13 @@ class ItemController extends Controller
             $comments->user = $user;
         }
 
+        $config_rate_names = $this->config_rate_names();
+
         $data = [
             'item' => $item,
             'comments' => $comments,
-            'high_rate_name' => '<i class="glyphicon glyphicon-thumbs-up"></i> ' . \Config::get('anime_type.high_rate_name'),
-            'low_rate_name' => '<i class="glyphicon glyphicon-thumbs-down"></i> ' . \Config::get('anime_type.low_rate_name'),
+            'high_rate_name' => $config_rate_names['high_rate_name'],
+            'low_rate_name' => $config_rate_names['low_rate_name'],
         ];
 
         $data += $this->counts($item);

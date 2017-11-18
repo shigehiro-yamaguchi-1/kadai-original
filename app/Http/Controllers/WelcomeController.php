@@ -58,9 +58,13 @@ class WelcomeController extends Controller
             }
         }
 
+        $config_rate_names = $this->config_rate_names();
+
         $data = [
             'rankings' => $rankingDatas,
             'year_seasons' => $year_seasons,
+            'high_rate_name' => $config_rate_names['high_rate_name'],
+            'low_rate_name' => $config_rate_names['low_rate_name'],
         ];
 
         return view('welcome', $data);

@@ -20,4 +20,11 @@ class Controller extends BaseController
             'count_low_rates' => $count_low_rates,
         ];
     }
+    
+    public static function config_rate_names() {
+        return [
+            'high_rate_name' => '<i class="glyphicon glyphicon-thumbs-up"></i> ' . \Config::get('anime_type.high_rate_name'),
+            'low_rate_name' => '<i class="glyphicon glyphicon-thumbs-down"></i> ' . \Config::get('anime_type.low_rate_name'),
+        ];
+    }
 }
