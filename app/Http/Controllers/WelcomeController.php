@@ -11,44 +11,55 @@ class WelcomeController extends Controller
     public function index()
     {
 
-        // formのselect用
-        $years = Season_ranking_data::groupby('year')->orderby('year', 'DESC')->pluck('year', 'year');
-        $seasons = Season_ranking_data::groupby('season')->orderby('season', 'DESC')->pluck('season', 'season');
+        // SelectBox用にyear,seasonを取得
+        $ranking_year_seasons = Season_ranking_data::select('year','season')
+                                            ->groupby('year','season')
+                                            ->orderby('year', 'DESC')
+                                            ->orderby('season', 'DESC')
+                                            ->get();
 
-        // selectからの返り値
+        // SelectBoxからの返り値
         if (request()->year_season === null) {
-            // selectから取得できなかった場合の初期値
-            // 上でyear,seasonをdescソートしているのでこれでいっかな
-            $year = $years->first();;
-            $season = $seasons->first();;
+            // SelectBoxから取得できなかった場合の初期値
+            $year = $ranking_year_seasons->first()->year;
+            $season = $ranking_year_seasons->first()->season;
         } else {
             // requestのyear_seasonは、'yyyy,mm'で返ってくるため分解する
-            $year_season = explode(',', request()->year_season);
-            $year = $year_season[0];
-            $season = $year_season[1];
+            $select_year_season = explode(',', request()->year_season);
+            $year = $select_year_season[0];
+            $season = $select_year_season[1];
         }
+        // 指定のyear, seasonで表示用ランキングデータを取ってくるよ
+        $rankingDatas = Season_ranking_data::where('year', $year)
+                                            ->where('season', $season)
+                                            ->get();
 
-        // 年とシーズンで絞るよ
-        $rankingData = Season_ranking_data::where('year', $year)
-                        ->where('season', $season)
-                        ->get();
-
+        // SelectBox用に加工していくよ
+        // Array
+        // (
+        //     [2017年] => Array
+        //         (
+        //             [2017,4] => 2017年 冬アニメ
+        //             [2017,3] => 2017年 秋アニメ
+        //         )
+        //     [2016年] => Array
+        //         (
+        //             [2016,4] => 2016年 冬アニメ
+        //             [2016,1] => 2016年 春アニメ
+        //         )
+        // )
         $year_seasons = [];
-        foreach ($years as $year) {
-            $key = $year.'年';
-            foreach ($seasons as $season) {
-                if (array_key_exists($key, $year_seasons)) {
-                    $year_seasons[$key] += [$year.','.$season => $year.'年 '.\Config::get('anime_item.seasons')[$season].'アニメ'];
-                } else {
-                    $year_seasons[$key] = [$year.','.$season => $year.'年 '.\Config::get('anime_item.seasons')[$season].'アニメ'];
-                }
+        foreach ($ranking_year_seasons as $ranking_year_season) {
+            $key = $ranking_year_season->year.'年';
+            if (array_key_exists($key, $year_seasons)) {
+                $year_seasons[$key] += [$ranking_year_season->year.','.$ranking_year_season->season => $ranking_year_season->year.'年 '.\Config::get('anime_item.seasons')[$ranking_year_season->season].'アニメ'];
+            } else {
+                $year_seasons[$key] = [$ranking_year_season->year.','.$ranking_year_season->season => $ranking_year_season->year.'年 '.\Config::get('anime_item.seasons')[$ranking_year_season->season].'アニメ'];
             }
         }
 
         $data = [
-            'rankings' => $rankingData,
-            'years' => $years,
-            'seasons' => $seasons,
+            'rankings' => $rankingDatas,
             'year_seasons' => $year_seasons,
         ];
 
