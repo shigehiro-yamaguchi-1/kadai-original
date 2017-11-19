@@ -24,6 +24,7 @@
 
                             <ul class="dropdown-menu">
                                 <li>{!! link_to_route('users.profile', 'プロフィール', ['id' => Auth::user()->id]) !!}</li>
+                                <li>{!! link_to_route('users.friend_list', '友達一覧', ['id' => Auth::user()->id]) !!}</li>
                                 <li>
                                     <a href="{{ route('logout') }}"
                                         onclick="event.preventDefault();

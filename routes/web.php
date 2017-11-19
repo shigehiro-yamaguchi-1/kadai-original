@@ -62,13 +62,13 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::post('detail/{item}', 'CommentController@newComment')->name('comment.new');
     
     // プロフィール
-    Route::get('profile/{id}', 'UsersController@show')->name('users.profile');
+    Route::get('profile/{id}', 'UsersController@profile')->name('users.profile');
 
     // フレンド関連
     Route::group(['prefix' => 'users/{id}'], function () { 
         Route::post('friend', 'UserFriendController@friend')->name('user.friend');
         Route::delete('unfriend', 'UserFriendController@unfriend')->name('user.unfriend');
-        Route::get('friends', 'UsersController@friends')->name('users.friends');
+        Route::get('friend_list', 'UsersController@friend_list')->name('users.friend_list');
     });
 });
  
