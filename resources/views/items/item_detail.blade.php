@@ -51,34 +51,43 @@
         {{-- 評価領域 --}}
     </div>
 
-
-    <div class="container-fluid">
+    <div class="panel panel-success">
         @if(!$comments->isEmpty())
-            <h1 id = "reply">コメント一覧</h1>
-            <div class="comment_area"> 
-                <div ng-repeat="data in hoge.chatdata">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            @foreach($comments as $comment)
-                                @guest
-                                    <p class="left_balloon">{{$comment->comment}}<br>{!! link_to_route('users.profile', $comment->user->name, ['id' => $comment->user->id]) !!} {{$comment->created_at}}</p><br> <!-- 他人のコメント -->
-                                @else
-                                    @if(\Auth::user()->id === $comment->user_id)
-                                        <span ng-if="data.type == 'chat'">
-                                            <p class="right_balloon new_line">{{$comment->comment}}<br>{!! link_to_route('users.profile', $comment->user->name, ['id' => $comment->user->id]) !!} {{$comment->created_at}}</p><br> <!-- 自分のコメント -->
-                                        </span>
-                                    @else
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h5 id = "reply" class="text-center">コメント一覧</h5>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="comment_area"> 
+                    <div ng-repeat="data in hoge.chatdata">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @foreach($comments as $comment)
+                                    @guest
                                         <p class="left_balloon">{{$comment->comment}}<br>{!! link_to_route('users.profile', $comment->user->name, ['id' => $comment->user->id]) !!} {{$comment->created_at}}</p><br> <!-- 他人のコメント -->
-                                    @endif
-                                @endguest
-                            @endforeach
-                        </div>  
-                        {!! $comments->render() !!}
+                                    @else
+                                        @if(\Auth::user()->id === $comment->user_id)
+                                            <span ng-if="data.type == 'chat'">
+                                                <p class="right_balloon new_line">{{$comment->comment}}<br>{!! link_to_route('users.profile', $comment->user->name, ['id' => $comment->user->id]) !!} {{$comment->created_at}}</p><br> <!-- 自分のコメント -->
+                                            </span>
+                                        @else
+                                            <p class="left_balloon">{{$comment->comment}}<br>{!! link_to_route('users.profile', $comment->user->name, ['id' => $comment->user->id]) !!} {{$comment->created_at}}</p><br> <!-- 他人のコメント -->
+                                        @endif
+                                    @endguest
+                                @endforeach
+                            </div>  
+                            {!! $comments->render() !!}
+                        </div>
                     </div>
                 </div>
             </div>
         @else
-            <h2>コメントはありません</h2>
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h5 class="text-center">コメントはありません</h5>
+                </div>
+            </div>
         @endif
         <div class="text-right">
             @guest

@@ -2,8 +2,12 @@
 
 @section('content')
     <div>
-        <div>
-            <h1>{{$user[0]['name']}}さんのプロフィール</h1>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h1>{{$user[0]['name']}}さんのプロフィール</h1>
+                </div>
+            </div>
             <table class="table">
                 <tbody>
                     <tr>
@@ -25,8 +29,13 @@
             @include('users.friend_button')
         </div>
 
-        <div>
-            <h1>{{$user[0]['name']}}さんの視聴アニメ</h1>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h1>{{$user[0]['name']}}さんの視聴アニメ</h1>
+                </div>
+            </div>
+
             <table class="table table-hover table-color">
                 <tbody class="evaluate_color">
                     @foreach ($evaluates as $evaluate)

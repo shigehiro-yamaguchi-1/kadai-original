@@ -12,6 +12,7 @@
                 <a class="navbar-left" href="/">あにらん</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
                 <ul class="nav navbar-nav navbar-right">
                     @guest
                         <li><a href="{{ route('login') }}"><button tyoe="button" class="btn btn-primary glyphicon glyphicon-log-in"> ログイン</button></a></li>

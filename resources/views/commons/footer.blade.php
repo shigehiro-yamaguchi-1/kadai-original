@@ -1,3 +1,3 @@
 <footer>
-    <div class="text-center text-muted">© 2017 xxxxx.</div>
+    <div class="text-center text-muted">© 2017 aniran.</div>
 </footer>
