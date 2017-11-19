@@ -12,9 +12,13 @@ class UsersController extends Controller
         $userData = User::find($id);
         // 他人も見るので最小限
         $user = User::select('id', 'name')->where('id', '=', $id)->get()->toArray();
+        
+        // 視聴一覧（＝評価したもの）
+        $evaluates = $userData->evaluates()->orderby('type')->get();
 
         $data = [
             'user' => $user,
+            'evaluates' => $evaluates,
         ];
         
         $data += $this->user_counts($userData);
