@@ -29,9 +29,9 @@ class ItemController extends Controller
             'low_rate_name' => $config_rate_names['low_rate_name'],
         ];
 
-        $data += $this->counts($item);
+        $data += $this->item_counts($item);
 
-        return view('items.show', $data);
+        return view('items.item_detail', $data);
     }
     
 

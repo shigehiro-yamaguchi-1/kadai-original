@@ -63,8 +63,8 @@ class WelcomeController extends Controller
         $data = [
             'rankings' => $rankingDatas,
             'year_seasons' => $year_seasons,
-            'high_rate_name' => $config_rate_names['high_rate_name'],
-            'low_rate_name' => $config_rate_names['low_rate_name'],
+            'high_rate_i' => $config_rate_names['high_rate_i'],
+            'low_rate_i' => $config_rate_names['low_rate_i'],
         ];
 
         return view('welcome', $data);

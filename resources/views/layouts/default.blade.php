@@ -29,7 +29,13 @@
 
         <div class="container">
             @include('commons.error_messages')
-            @yield('content')
+            <div class="row">
+                @include('commons.left_side')
+                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                    @yield('content')
+                </div>
+                @include('commons.right_side')
+            </div>
         </div>
 
         @include('commons.footer')

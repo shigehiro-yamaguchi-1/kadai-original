@@ -59,7 +59,7 @@ class CreateRankingData extends Command
             $rankingData[$key]['profile_image_url'] = $item->profile_image_url;
 
             // high & low
-            $array = Controller::counts($item);
+            $array = Controller::item_counts($item);
             $rankingData[$key]['high_rate']     = $array['count_high_rates']; // high_rate
             $rankingData[$key]['low_rate']      = $array['count_low_rates']; // low_rate
             

@@ -13,10 +13,17 @@
 
 
 
-Auth::routes();
+/*
+|--------------------------------------------------------------------------
+| 1) User 認証不要
+|--------------------------------------------------------------------------
+*/
+
 // モデルとの結合
 Route::model('item', 'App\M_item');
 
+// ログイン関連
+Auth::routes();
 //Twitter
 Route::get('auth/twitter', 'Auth\OAuthLoginController@getAuth');
 Route::get('auth/callback/twitter', 'Auth\OAuthLoginController@authCallback');
@@ -26,18 +33,15 @@ Route::get('auth/callback/facebook', 'Auth\OAuthLoginController@authCallback');
 //Google
 Route::get('auth/google', 'Auth\OAuthLoginController@getAuth');
 Route::get('auth/callback/google', 'Auth\OAuthLoginController@authCallback');
- 
-/*
-|--------------------------------------------------------------------------
-| 1) User 認証不要
-|--------------------------------------------------------------------------
-*/
-Route::get('/home', function () { return redirect('/'); });
-    // Route::get('/home', 'HomeController@index')->name('home');
 
+// トップ
+Route::get('/home', function () { return redirect('/'); });
 Route::get('/', 'WelcomeController@index')->name('get.home');
 Route::post('/', 'WelcomeController@index')->name('post.home');
-Route::get('detail/{id}', 'ItemController@show')->name('item.show');
+
+// アイテム詳細
+Route::get('detail/{id}', 'ItemController@show')->name('items.item_detail');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,8 +49,7 @@ Route::get('detail/{id}', 'ItemController@show')->name('item.show');
 |--------------------------------------------------------------------------
 */
 Route::group(['middleware' => 'auth:user'], function() {
-    // Route::get('/home', 'HomeController@index')->name('home');
-    
+
     // high_rate
     Route::post('high_rate', 'ItemController@high_rate')->name('item.high_rate');
     Route::delete('high_rate', 'ItemController@dont_high_rate')->name('item.dont_high_rate');
@@ -57,6 +60,16 @@ Route::group(['middleware' => 'auth:user'], function() {
     
     // コメント投稿
     Route::post('detail/{item}', 'CommentController@newComment')->name('comment.new');
+    
+    // プロフィール
+    Route::get('profile/{id}', 'UsersController@show')->name('users.profile');
+
+    // フレンド関連
+    Route::group(['prefix' => 'users/{id}'], function () { 
+        Route::post('friend', 'UserFriendController@store')->name('user.friend');
+        Route::delete('unfriend', 'UserFriendController@destroy')->name('user.unfriend');
+        Route::get('friends', 'UsersController@friends')->name('users.friends');
+    });
 });
  
 /*

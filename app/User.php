@@ -31,7 +31,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     
-    public function items()
+    public function evaluates()
     {
         return $this->belongsToMany(M_item::class, 'item_evaluate', 'user_id', 'item_id')->withPivot('type')->withTimestamps();
     }
@@ -42,7 +42,7 @@ class User extends Authenticatable
     // #################
     public function high_rate_items()
     {
-        return $this->items()->where('type', \Config::get('anime_type.high_rate'));
+        return $this->evaluates()->where('type', \Config::get('anime_type.high_rate'));
     }
     
     public function high_rate($itemId)
@@ -55,7 +55,7 @@ class User extends Authenticatable
             return false;
         } else {
             // 未high_rateであればhigh_rateする
-            $this->items()->attach($itemId, ['type' => \Config::get('anime_type.high_rate')]);
+            $this->evaluates()->attach($itemId, ['type' => \Config::get('anime_type.high_rate')]);
             
             // 既にbad_rateであればdetachする
             $this->dont_low_rate($itemId);
@@ -89,7 +89,7 @@ class User extends Authenticatable
     // #################
     public function low_rate_items()
     {
-        return $this->items()->where('type', \Config::get('anime_type.low_rate'));
+        return $this->evaluates()->where('type', \Config::get('anime_type.low_rate'));
     }
     
     public function low_rate($itemId)
@@ -102,7 +102,7 @@ class User extends Authenticatable
             return false;
         } else {
             // 未low_rateであればlow_rateする
-            $this->items()->attach($itemId, ['type' => \Config::get('anime_type.low_rate')]);
+            $this->evaluates()->attach($itemId, ['type' => \Config::get('anime_type.low_rate')]);
 
             // 既にhigh_rateであればdetachする
             $this->dont_high_rate($itemId);
@@ -140,4 +140,51 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+    
+    // #################
+    // # 友達機能
+    // #################
+    public function friends()
+    {
+        return $this->belongsToMany(User::class, 'user_friends', 'user_id', 'friend_id')->withTimestamps();
+    }
+    
+    public function friend($userId)
+    {
+        // 既に友達追加しているかの確認
+        $exist = $this->is_friends($userId);
+        // 自分自身ではないかの確認
+        $its_me = $this->id == $userId;
+        
+        if ($exist || $its_me) {
+            // 既に友達追加していれば何もしない
+            return false;
+        } else {
+            // 未友達追加であれば友達追加する
+            $this->friends()->attach($userId);
+            return true;
+        }
+    }
+    
+    public function unfriend($userId)
+    {
+        // 既に友達追加しているかの確認
+        $exist = $this->is_friends($userId);
+        // 自分自身ではないかの確認
+        $its_me = $this->id == $userId;
+        
+        if ($exist && !$its_me) {
+            // 既に友達追加していれば友達追加を外す
+            $this->friends()->detach($userId);
+            return true;
+        } else {
+            // 未友達追加であれば何もしない
+            return false;
+        }
+    }
+    
+    public function is_friends($userId) {
+        return $this->friends()->where('friend_id', $userId)->exists();
+    }
+    
 }
