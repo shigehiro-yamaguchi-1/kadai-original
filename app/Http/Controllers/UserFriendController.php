@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 
 class UserFriendController extends Controller
 {
-    public function store(Request $request, $id)
+    public function friend(Request $request, $id)
     {
         \Auth::user()->friend($id);
         return redirect()->back();
     }
 
-    public function destroy($id)
+    public function unfriend($id)
     {
         \Auth::user()->unfriend($id);
         return redirect()->back();

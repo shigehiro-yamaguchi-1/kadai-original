@@ -58,13 +58,13 @@ class User extends Authenticatable
             $this->evaluates()->attach($itemId, ['type' => \Config::get('anime_type.high_rate')]);
             
             // 既にbad_rateであればdetachする
-            $this->dont_low_rate($itemId);
+            $this->un_low_rate($itemId);
 
             return true;
         }
     }
     
-    public function dont_high_rate($itemId)
+    public function un_high_rate($itemId)
     {
         // 既にhigh_rateしているかの確認
         $exist = $this->is_high_rating($itemId);
@@ -105,13 +105,13 @@ class User extends Authenticatable
             $this->evaluates()->attach($itemId, ['type' => \Config::get('anime_type.low_rate')]);
 
             // 既にhigh_rateであればdetachする
-            $this->dont_high_rate($itemId);
+            $this->un_high_rate($itemId);
 
             return true;
         }
     }
     
-    public function dont_low_rate($itemId)
+    public function un_low_rate($itemId)
     {
         // 既にlow_rateしているかの確認
         $exist = $this->is_low_rating($itemId);

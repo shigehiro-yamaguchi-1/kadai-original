@@ -51,12 +51,12 @@ Route::get('detail/{id}', 'ItemController@show')->name('items.item_detail');
 Route::group(['middleware' => 'auth:user'], function() {
 
     // high_rate
-    Route::post('high_rate', 'ItemController@high_rate')->name('item.high_rate');
-    Route::delete('high_rate', 'ItemController@dont_high_rate')->name('item.dont_high_rate');
+    Route::post('high_rate', 'ItemEvaluateController@high_rate')->name('item.high_rate');
+    Route::delete('high_rate', 'ItemEvaluateController@un_high_rate')->name('item.un_high_rate');
 
     // low_rate
-    Route::post('low_rate', 'ItemController@low_rate')->name('item.low_rate');
-    Route::delete('low_rate', 'ItemController@dont_low_rate')->name('item.dont_low_rate');
+    Route::post('low_rate', 'ItemEvaluateController@low_rate')->name('item.low_rate');
+    Route::delete('low_rate', 'ItemEvaluateController@un_low_rate')->name('item.un_low_rate');
     
     // コメント投稿
     Route::post('detail/{item}', 'CommentController@newComment')->name('comment.new');
@@ -66,8 +66,8 @@ Route::group(['middleware' => 'auth:user'], function() {
 
     // フレンド関連
     Route::group(['prefix' => 'users/{id}'], function () { 
-        Route::post('friend', 'UserFriendController@store')->name('user.friend');
-        Route::delete('unfriend', 'UserFriendController@destroy')->name('user.unfriend');
+        Route::post('friend', 'UserFriendController@friend')->name('user.friend');
+        Route::delete('unfriend', 'UserFriendController@unfriend')->name('user.unfriend');
         Route::get('friends', 'UsersController@friends')->name('users.friends');
     });
 });

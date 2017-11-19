@@ -1,5 +1,5 @@
 @if (Auth::user()->is_high_rating($item->id))
-    {!! Form::open(['route' => 'item.dont_high_rate', 'method' => 'delete']) !!}
+    {!! Form::open(['route' => 'item.un_high_rate', 'method' => 'delete']) !!}
         {!! Form::hidden('itemId', $item->id) !!}
         {!! Form::button($high_rate_name, array('type' => 'submit', 'class' => 'btn btn-success')) !!}
         {{ csrf_field() }}
