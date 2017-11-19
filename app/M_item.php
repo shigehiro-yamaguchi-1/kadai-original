@@ -33,5 +33,5 @@ class M_item extends Model
     {
         return $this->hasMany(Comment::class);
     }
-
+    
 }
