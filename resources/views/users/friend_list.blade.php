@@ -8,15 +8,21 @@
         </div>
     </div>
     <div>
-        <table class="table table-hover">
-            <tbody>
-                @foreach ($friends as $friend)
-                    <tr>
-                        <td>{!! link_to_route('users.profile', $friend->name, ['id' => $friend->id]) !!}</td>
-                    </tr>
-                @endforeach
-         </tbody>
-        </table>
+        @if (\Auth::user()->id === $user->id && $count_friends === 0)
+            <p>あなたは一人じゃないd(￣ ￣)</p>
+        @elseif ($count_friends === 0)
+            <p>ぼっち...</p>
+        @else
+            <table class="table table-hover">
+                <tbody>
+                    @foreach ($friends as $friend)
+                        <tr>
+                            <td>{!! link_to_route('users.profile', $friend->name, ['id' => $friend->id]) !!}</td>
+                        </tr>
+                    @endforeach
+                 </tbody>
+            </table>
+        @endif
     </div>
 </div>
 @endsection
