@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth:user'], function() {
     
     // プロフィール
     Route::get('profile/{id}', 'UsersController@profile')->name('users.profile');
+    Route::post('profile/{id}', 'UsersController@profile')->name('post.users.profile');
 
     // フレンド関連
     Route::group(['prefix' => 'users/{id}'], function () { 

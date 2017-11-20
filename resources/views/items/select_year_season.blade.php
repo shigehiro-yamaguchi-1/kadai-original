@@ -1,4 +1,5 @@
-{!! Form::open(['route' => 'post.home', 'method' => 'post', 'id' => 'submit_form']) !!}
+
+{!! Form::open(['id' => 'submit_form']) !!}
     {!! Form::select('year_season', $year_seasons, null, ['class' => 'selectpicker', 'id' => 'submit_select']) !!}
     {{ csrf_field() }}
 {!! Form::close() !!}

@@ -5,15 +5,15 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">
-                    <h1>{{$user[0]['name']}}さんのプロフィール</h1>
+                    <h1>{{$user->name}}さんのプロフィール</h1>
                 </div>
             </div>
             <table class="table">
                 <tbody>
                     <tr>
-                        <td width="20%">名前</td><td>{{$user[0]['name']}}</td>
+                        <td width="20%">名前</td><td>{{$user->name}}</td>
                     </tr>
-                    @if (\Auth::user()->id === $user[0]['id'])
+                    @if (\Auth::user()->id === $user->id)
                         <tr>
                             <td width="20%">メールアドレス</td><td>{{\Auth::user()->email}}</td>
                         </tr>
@@ -32,10 +32,10 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <div class="panel-title">
-                    <h1>{{$user[0]['name']}}さんの視聴アニメ</h1>
+                    <h1>{{$user->name}}さんの視聴アニメ</h1>
                 </div>
             </div>
-
+            @include('items.select_year_season')
             <table class="table table-hover">
                 <tbody id="evaluate_color">
                     @foreach ($evaluates as $evaluate)

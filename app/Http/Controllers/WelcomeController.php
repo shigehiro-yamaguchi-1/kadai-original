@@ -35,29 +35,8 @@ class WelcomeController extends Controller
                                             ->get();
 
         // SelectBox用に加工していくよ
-        // Array
-        // (
-        //     [2017年] => Array
-        //         (
-        //             [2017,4] => 2017年 冬アニメ
-        //             [2017,3] => 2017年 秋アニメ
-        //         )
-        //     [2016年] => Array
-        //         (
-        //             [2016,4] => 2016年 冬アニメ
-        //             [2016,1] => 2016年 春アニメ
-        //         )
-        // )
-        $year_seasons = [];
-        foreach ($ranking_year_seasons as $ranking_year_season) {
-            $key = $ranking_year_season->year.'年';
-            if (array_key_exists($key, $year_seasons)) {
-                $year_seasons[$key] += [$ranking_year_season->year.','.$ranking_year_season->season => $ranking_year_season->year.'年 '.\Config::get('anime_item.seasons')[$ranking_year_season->season].'アニメ'];
-            } else {
-                $year_seasons[$key] = [$ranking_year_season->year.','.$ranking_year_season->season => $ranking_year_season->year.'年 '.\Config::get('anime_item.seasons')[$ranking_year_season->season].'アニメ'];
-            }
-        }
-
+        $year_seasons = $this->get_select_array($ranking_year_seasons);
+        
         $config_rate_names = $this->config_rate_names();
 
         $data = [

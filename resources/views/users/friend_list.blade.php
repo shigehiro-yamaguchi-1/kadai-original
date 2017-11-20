@@ -4,7 +4,7 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="panel-title">
-            <h1>{{$user[0]['name']}}さんの友達一覧（{{$count_friends}}人）</h1>
+            <h1>{{$user->name}}さんの友達一覧（{{$count_friends}}人）</h1>
         </div>
     </div>
     <div>

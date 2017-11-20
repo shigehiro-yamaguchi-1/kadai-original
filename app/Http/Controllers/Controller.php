@@ -37,4 +37,24 @@ class Controller extends BaseController
             'low_rate_name'     => '<i class="glyphicon glyphicon-thumbs-down"></i> '   . \Config::get('anime_type.low_rate_name'),
         ];
     }
+    
+     /**************************************************
+    	SelectBox選択肢生成
+    	desc    : yearでグルーピングした多次元連想配列を返します
+    	return  : 多次元連想配列
+    	arg1    : $array
+    **************************************************/ 
+    public function get_select_array($arrays)
+    {
+        $year_seasons = [];
+        foreach ($arrays as $array) {
+            $key = $array->year.'年';
+            if (array_key_exists($key, $year_seasons)) {
+                $year_seasons[$key] += [$array->year.','.$array->season => $array->year.'年 '.\Config::get('anime_item.seasons')[$array->season].'アニメ'];
+            } else {
+                $year_seasons[$key] = [$array->year.','.$array->season => $array->year.'年 '.\Config::get('anime_item.seasons')[$array->season].'アニメ'];
+            }
+        }
+        return $year_seasons;
+    }
 }
