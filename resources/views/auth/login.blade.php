@@ -8,6 +8,7 @@
             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
 
+{{--
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" class="col-md-4 control-label">メールアドレス</label>
 
@@ -57,18 +58,19 @@
                         </a>
                     </div>
                 </div>
-
+--}}
                 <!-- ソーシャルログイン -->
                 <div class="form-group">
                     <div class="col-md-4 col-md-offset-4">
+{{--
                         <a class="btn btn-social btn-twitter"  href="auth/twitter">
                             <span class="fa fa-twitter"></span> Sign in with Twitter
                         </a>
-                        
+--}}                        
                         <!--<a class="btn btn-block btn-social btn-facebook" href="auth/facebook">-->
                         <!--    <span class="fa fa-facebook"></span> Sign in with Facebook-->
                         <!--</a>-->
-                        
+                        <p>現在はGoogle認証のみです(´ε｀ )</p>
                         <a class="btn btn-social btn-google"  href="auth/google">
                             <span class="fa fa-google"></span> Sign in with Google
                         </a>
