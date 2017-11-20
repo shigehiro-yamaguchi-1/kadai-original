@@ -14,7 +14,6 @@ class UsersController extends Controller
         // 視聴一覧（＝評価したもの）
         // SelectBox用にyear,seasonを取得
         $evaluate_year_seasons = $userData->evaluates()->select('year','season')
-                                        ->groupBy('year', 'season')
                                         ->orderby('year', 'DESC')
                                         ->orderby('season', 'DESC')
                                         ->get();
