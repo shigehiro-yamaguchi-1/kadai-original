@@ -25,7 +25,7 @@
                     <th width="10%" class="text-center">{!!$low_rate_i!!}</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="ranking_color">
             @foreach($rankings as $key => $ranking)
                 <tr>
                     <td width="10%" class="text-center">{{$ranking->rank}}</td>
@@ -38,4 +38,20 @@
             </tbody>
         </table>
     </div>
+    
+    <script>
+        $('#ranking_color tr').each(function() {
+            var rank = $('td', this).eq(0).text();
+            var score = $('td', this).eq(1).text();
+            if (rank == 1 && score > 50) {
+                $(this).css('background-color', '#f2ff44');
+            } else {
+                if (score > 50) {
+                    $(this).css('background-color', '#f6fff7');
+                } else if(score < 50) {
+                    $(this).css('background-color', '#fdefef');
+                }
+            }
+        });
+    </script>
 @endsection
