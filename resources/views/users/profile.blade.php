@@ -36,8 +36,8 @@
                 </div>
             </div>
 
-            <table class="table table-hover table-color">
-                <tbody class="evaluate_color">
+            <table class="table table-hover">
+                <tbody id="evaluate_color">
                     @foreach ($evaluates as $evaluate)
                         <tr>
                             <td class="width="80%" class="text-left ellipsis"><img src = "{{ $evaluate->profile_image_url }}"> {!! link_to_route('items.item_detail', $evaluate->title, ['id' => $evaluate->id]) !!}</td>
@@ -52,12 +52,12 @@
     
 <script>
 var high_rate_name = "{!! \Config::get('anime_type.high_rate_name'); !!}";
-$('.evaluate_color tr').each(function() {
+$('#evaluate_color tr').each(function() {
     var text = $('td', this).eq(1).text();
     if (text == high_rate_name) {
         $(this).css('background-color', '#f6fff7');
     } else {
-        $(this).css('background-color', '#ffd5d529');
+        $(this).css('background-color', '#fdefef');
     }
 });
 </script>

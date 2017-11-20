@@ -21,14 +21,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
         
         <!-- 左サイドメニュー -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.1.0/css/drawer.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.1.0/js/drawer.min.js"></script>
+        <link rel="stylesheet" href="{{ asset('css/drawer.min.css') }}">
+        <script src="/js/drawer.min.js"></script>
         <script src="/js/iscroll.js"></script>
-        <script>
-            $(document).ready(function() {
-              $(".drawer").drawer();
-            });
-        </script>
         
         <!-- コメント・チャット -->
         <link rel="stylesheet" href="{{ asset('css/chat.css') }}">
@@ -38,6 +33,7 @@
 
 
     </head>
+
     <body class="drawer drawer--left drawer--sidebar">
         @yield('cover')
 
@@ -55,5 +51,14 @@
         </div>
 
         @include('commons.footer')
+
+
+        <!-- 左サイドメニュー -->
+        <script>
+            $(document).ready(function() {
+              $(".drawer").drawer();
+            });
+        </script>
     </body>
+
 </html>

@@ -145,3 +145,20 @@ table.table-headerfixed thead th {
     line-height:1;
     color:#333;
 }
+
+/* 左メニュー */
+/* 基本はdrawer.min.css */
+.left-side-color {
+    background-color: #000;
+    border: 1px solid blue;
+}
+
+.left-side-color a {
+    background-color: #000;
+    color: white;
+    border: 0.7px dotted white;
+}
+
+.left-side-color a:first-child {
+    font-weight: bold;
+}

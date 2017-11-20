@@ -31,10 +31,10 @@ class Controller extends BaseController
     
     public static function config_rate_names() {
         return [
-            'high_rate_i' => '<i class="glyphicon glyphicon-thumbs-up"></i>',
-            'low_rate_i' => '<i class="glyphicon glyphicon-thumbs-down"></i>',
-            'high_rate_name' => '<i class="glyphicon glyphicon-thumbs-up"></i> ' . \Config::get('anime_type.high_rate_name'),
-            'low_rate_name' => '<i class="glyphicon glyphicon-thumbs-down"></i> ' . \Config::get('anime_type.low_rate_name'),
+            'high_rate_i'       => '<i class="glyphicon glyphicon-thumbs-up"></i>',
+            'low_rate_i'        => '<i class="glyphicon glyphicon-thumbs-down"></i>',
+            'high_rate_name'    => '<i class="glyphicon glyphicon-thumbs-up"></i> '     . \Config::get('anime_type.high_rate_name'),
+            'low_rate_name'     => '<i class="glyphicon glyphicon-thumbs-down"></i> '   . \Config::get('anime_type.low_rate_name'),
         ];
     }
 }

@@ -1,5 +1,12 @@
-{!! Form::open() !!}
-    {!! Form::select('year_season', $year_seasons, null, ['class' => 'selectpicker']) !!}
-    {!! Form::submit('GO', ['class' => 'btn btn-primary']) !!}
+{!! Form::open(['route' => 'post.home', 'method' => 'post', 'id' => 'submit_form']) !!}
+    {!! Form::select('year_season', $year_seasons, null, ['class' => 'selectpicker', 'id' => 'submit_select']) !!}
     {{ csrf_field() }}
 {!! Form::close() !!}
+
+<script type="text/javascript">
+$(function(){
+  $("#submit_select").change(function(){
+    $("#submit_form").submit();
+  });
+});
+</script>
