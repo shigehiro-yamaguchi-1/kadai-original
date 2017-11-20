@@ -43,9 +43,11 @@
         $('#ranking_color tr').each(function() {
             var rank = $('td', this).eq(0).text();
             var score = $('td', this).eq(1).text();
+            // ランクで色分け
             if (rank == 1 && score > 50) {
                 $(this).css('background-color', '#f2ff44');
             } else {
+                // スコアで色分け
                 if (score > 50) {
                     $(this).css('background-color', '#f6fff7');
                 } else if(score < 50) {
