@@ -18,32 +18,41 @@ class UsersController extends Controller
                                         ->orderby('season', 'DESC')
                                         ->get();
 
-        // SelectBoxからの返り値
-        if (request()->year_season === null) {
-            // SelectBoxから取得できなかった場合の初期値
-            $year = $evaluate_year_seasons->first()->year;
-            $season = $evaluate_year_seasons->first()->season;
+        if (($evaluate_year_seasons->isNotEmpty())) {
+            // SelectBoxからの返り値
+            if (request()->year_season === null) {
+                // SelectBoxから取得できなかった場合の初期値
+                $year = $evaluate_year_seasons->first()->year;
+                $season = $evaluate_year_seasons->first()->season;
+            } else {
+                // requestのyear_seasonは、'yyyy,mm'で返ってくるため分解する
+                $select_year_season = explode(',', request()->year_season);
+                $year = $select_year_season[0];
+                $season = $select_year_season[1];
+            }
+
+            // 指定のyear, seasonで表示用ランキングデータを取ってくるよ
+            $evaluates = $userData->evaluates()->where('year', $year)
+                                            ->where('season', $season)
+                                            ->orderby('type', 'ASC')
+                                            ->get();
+    
+            // SelectBox用に加工していくよ
+            $year_seasons = $this->get_select_array($evaluate_year_seasons);
+    
+    
+            $data = [
+                'user' => $userData,
+                'evaluates' => $evaluates,
+                'year_seasons' => $year_seasons,
+            ];
+
         } else {
-            // requestのyear_seasonは、'yyyy,mm'で返ってくるため分解する
-            $select_year_season = explode(',', request()->year_season);
-            $year = $select_year_season[0];
-            $season = $select_year_season[1];
+            $data = [
+                'user' => $userData,
+                'year_seasons' => 0,
+            ];
         }
-
-        // 指定のyear, seasonで表示用ランキングデータを取ってくるよ
-        $evaluates = $userData->evaluates()->where('year', $year)
-                                        ->where('season', $season)
-                                        ->orderby('type', 'ASC')
-                                        ->get();
-
-        // SelectBox用に加工していくよ
-        $year_seasons = $this->get_select_array($evaluate_year_seasons);
-
-        $data = [
-            'user' => $userData,
-            'evaluates' => $evaluates,
-            'year_seasons' => $year_seasons,
-        ];
         
         $data += $this->user_counts($userData);
         

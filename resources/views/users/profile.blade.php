@@ -35,18 +35,23 @@
                     <h1>{{$user->name}}さんの視聴アニメ</h1>
                 </div>
             </div>
-            @include('items.select_year_season')
-            <table class="table table-hover">
-                <tbody id="evaluate_color">
-                    @foreach ($evaluates as $evaluate)
-                        <tr>
-                            <td class="width="80%" class="text-left ellipsis"><img src = "{{ $evaluate->profile_image_url }}"> {!! link_to_route('items.item_detail', $evaluate->title, ['id' => $evaluate->id]) !!}</td>
-                            <td width="20%">{!!\Config::get('anime_type.'.$evaluate->pivot->type)!!}</td>
-                            <td></td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            @if ($year_seasons != 0)
+                @include('items.select_year_season')
+                <table class="table table-hover">
+                    <tbody id="evaluate_color">
+                        @foreach ($evaluates as $evaluate)
+                            <tr>
+                                <td class="width="80%" class="text-left ellipsis"><img src = "{{ $evaluate->profile_image_url }}"> {!! link_to_route('items.item_detail', $evaluate->title, ['id' => $evaluate->id]) !!}</td>
+                                <td width="20%">{!!\Config::get('anime_type.'.$evaluate->pivot->type)!!}</td>
+                                <td></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p>評価をしたアニメがありません。</p>
+                <p>評価をすることで視聴アニメとして表示されます。</p>
+            @endif
         </div>
     </div>
     
