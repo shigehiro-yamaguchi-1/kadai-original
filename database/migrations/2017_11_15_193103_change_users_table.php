@@ -30,7 +30,7 @@ class ChangeUsersTable extends Migration
             // DB::statement('UPDATE `users` SET `password` = "" WHERE `password` IS NULL');
 
             // passwordカラムにNULLを許容しない
-            DB::statement('ALTER TABLE `users` MODIFY `password` STRING NOT NULL;');
+            DB::statement('ALTER TABLE `users` MODIFY `password` varchar NOT NULL;');
         });
     }
 }
