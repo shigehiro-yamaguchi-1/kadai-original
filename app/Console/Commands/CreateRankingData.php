@@ -113,6 +113,15 @@ class CreateRankingData extends Command
         try{
             $cli = \DB::table('season_ranking_datas')
                     ->insert($rankingData);
+            // キャッシュクリア
+            // キャッシュクリア
+            // キャッシュクリア
+
+            \Cache::flush(); // すまんな...
+
+            // キャッシュクリア
+            // キャッシュクリア
+            // キャッシュクリア
         }catch(\Exception $e) {
             // てけとー
             echo 'データのinsertに失敗しました。';
