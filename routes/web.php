@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\MessagePosted;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,7 +41,13 @@ Route::get('/', 'WelcomeController@index')->name('get.home');
 Route::post('/', 'WelcomeController@index')->name('post.home');
 
 // アイテム詳細
-Route::get('detail/{id}', 'ItemController@show')->name('items.item_detail');
+Route::get('/detail/{id}', 'ItemController@show')->name('items.item_detail');
+
+Route::get('/messages', function() {
+    return App\Message::with('user')->get();
+});
+
+Route::get('/messages/{id}', 'CommentController@getComment')->name('get_comment');
 
 
 /*
@@ -59,7 +66,7 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::delete('low_rate', 'ItemEvaluateController@un_low_rate')->name('item.un_low_rate');
     
     // コメント投稿
-    Route::post('detail/{item}', 'CommentController@newComment')->name('comment.new');
+    // Route::post('detail/{item}', 'CommentController@newComment')->name('comment.new');
     
     // プロフィール
     Route::get('profile/{id}', 'UsersController@profile')->name('users.profile');
@@ -71,6 +78,29 @@ Route::group(['middleware' => 'auth:user'], function() {
         Route::delete('unfriend', 'UserFriendController@unfriend')->name('user.unfriend');
         Route::get('friend_list', 'UsersController@friend_list')->name('users.friend_list');
     });
+
+    Route::post('/detail/{id}', 'CommentController@postComment')->name('comment.new');
+    Route::post('/messages/{id}', 'CommentController@postComment')->name('post_comment');
+
+    Route::post('/messages', function () {
+        // Store the new message
+        $user = Auth::user();
+    
+        $message = $user->messages()->create([
+            'message' => request()->get('message')
+        ]);
+    
+        // Announce that a new message has been posted
+        broadcast(new MessagePosted($message, $user))->toOthers();
+    
+        return ['status' => 'OK'];
+    });
+
+
+    Route::get('/user', function () {
+        return \Auth::user();
+    });
+    
 });
  
 /*

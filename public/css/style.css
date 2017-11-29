@@ -162,3 +162,21 @@ table.table-headerfixed thead th {
 .left-side-color a:first-child {
     font-weight: bold;
 }
+
+
+/*チャット欄スクロール*/
+#target {
+/*position: absolute;*/
+top: 20px;
+bottom: 30px;
+width: 100%;
+height: 400px;
+overflow: auto;
+}
+
+#target p {
+padding: 15px;
+margin: 10px;
+border: solid thin lightgreen;
+border-radius: 5px;
+}
