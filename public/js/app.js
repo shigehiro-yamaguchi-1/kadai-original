@@ -17462,7 +17462,7 @@ if (document.getElementById("app")) {
                 });
             }).listen('MessagePosted', function (e) {
                 _this2.messages.unshift({
-                    message: e.message.comment,
+                    comment: e.message.comment,
                     user: e.user,
                     created_at: e.message.created_at
                 });
