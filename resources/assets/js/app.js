@@ -115,7 +115,7 @@ if(document.getElementById("app")){
                 })
                 .listen('MessagePosted', (e) => {
                     this.messages.unshift({
-                        message: e.message.comment,
+                        comment: e.message.comment,
                         user: e.user,
                         created_at: e.message.created_at
                     });
