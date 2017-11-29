@@ -17466,6 +17466,7 @@ if (document.getElementById("app")) {
                     user: e.user,
                     created_at: e.message.created_at
                 });
+                console.log(e.message);
             });
         }
     });
