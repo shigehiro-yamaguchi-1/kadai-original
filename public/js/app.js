@@ -17461,8 +17461,8 @@ if (document.getElementById("app")) {
                     return u != user;
                 });
             }).listen('MessagePosted', function (e) {
-                _this2.messages.push({
-                    message: e.message.message,
+                _this2.messages.unshift({
+                    message: e.message.comment,
                     user: e.user
                 });
             });
