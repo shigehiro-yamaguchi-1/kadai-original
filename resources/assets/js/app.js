@@ -114,8 +114,8 @@ if(document.getElementById("app")){
                     this.usersInRoom = this.usersInRoom.filter(u => u != user)
                 })
                 .listen('MessagePosted', (e) => {
-                    this.messages.push({
-                        message: e.message.message,
+                    this.messages.unshift({
+                        message: e.message.comment,
                         user: e.user
                     });
                 });
