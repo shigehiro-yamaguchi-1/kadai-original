@@ -17463,7 +17463,8 @@ if (document.getElementById("app")) {
             }).listen('MessagePosted', function (e) {
                 _this2.messages.unshift({
                     message: e.message.comment,
-                    user: e.user
+                    user: e.user,
+                    created_at: e.message.created_at
                 });
             });
         }
