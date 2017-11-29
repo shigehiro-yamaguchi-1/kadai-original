@@ -39,7 +39,7 @@ class MessagePosted implements ShouldBroadcast
      */
     public function __construct(Comment $message, User $user)
     {
-        $this->message = $message;
+        $this->comment = $message;
         $this->user = $user;
     }
 
