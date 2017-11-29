@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\M_item;
 use App\User;
-
+use App\Comment;
 
 class ItemController extends Controller
 {
@@ -33,4 +33,5 @@ class ItemController extends Controller
 
         return view('items.item_detail', $data);
     }
+    
 }
