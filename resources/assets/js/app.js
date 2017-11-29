@@ -103,7 +103,7 @@ if(document.getElementById("app")){
             //     this.messages = response.data;
             // });
             
-            Echo.join('chatroom')
+            Echo.join('chatroom.' + id)
                 .here((users) => {
                     this.usersInRoom = users;
                 })

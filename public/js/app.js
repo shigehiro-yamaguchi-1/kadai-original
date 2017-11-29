@@ -17452,7 +17452,7 @@ if (document.getElementById("app")) {
             //     this.messages = response.data;
             // });
 
-            Echo.join('chatroom').here(function (users) {
+            Echo.join('chatroom.' + id).here(function (users) {
                 _this2.usersInRoom = users;
             }).joining(function (user) {
                 _this2.usersInRoom.push(user);
