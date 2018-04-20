@@ -67,7 +67,11 @@
             <div class="panel-body" id="target">
                 <div class="row">
                     <div class="col-xs-12">
-                        <chat-log :messages="messages" :authUser="{{ json_encode(\Auth::user()) }}"></chat-log>
+                        @guest
+                            <chat-log :messages="messages" :authUser="guest"></chat-log>
+                        @else
+                            <chat-log :messages="messages" :authUser="{{ json_encode(\Auth::user()) }}"></chat-log>
+                        @endguest
                     </div>
                 </div>
             </div>

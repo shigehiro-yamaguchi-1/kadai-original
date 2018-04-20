@@ -1,13 +1,21 @@
 <template lang="html">
     <div class="chat-message">
-        <div class="right_balloon" v-if="authuser.id === message.user.id">
-            <span style="white-space: pre-wrap;">{{ message.comment }}</span><br>
-            <small><a v-bind:href="'/profile/' + message.user.id">{{ message.user.name }}</a> {{message.created_at}}</small>
-        </div>
-        <div class="left_balloon" v-else>
-            <span style="white-space: pre-wrap;">{{ message.comment }}</span><br>
-            <small><a v-bind:href="'/profile/' + message.user.id">{{ message.user.name }}</a> {{message.created_at}}</small>
-        </div>
+        <section v-if"authuser === 'guest'">
+            <div class="right_balloon">
+                <span style="white-space: pre-wrap;">{{ message.comment }}</span><br>
+                <small><a v-bind:href="'/profile/' + message.user.id">{{ message.user.name }}</a> {{message.created_at}}</small>
+            </div>
+        </section>
+        <section v-else>
+                    <div class="right_balloon" v-if="authuser.id === message.user.id">
+                <span style="white-space: pre-wrap;">{{ message.comment }}</span><br>
+                <small><a v-bind:href="'/profile/' + message.user.id">{{ message.user.name }}</a> {{message.created_at}}</small>
+            </div>
+            <div class="left_balloon" v-else>
+                <span style="white-space: pre-wrap;">{{ message.comment }}</span><br>
+                <small><a v-bind:href="'/profile/' + message.user.id">{{ message.user.name }}</a> {{message.created_at}}</small>
+            </div>
+        </section>
     </div>
 </template>
 

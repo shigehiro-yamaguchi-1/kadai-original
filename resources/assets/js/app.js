@@ -25,6 +25,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('chat-message', require('./components/ChatMessage.vue'));
+Vue.component('guest-chat-message', require('./components/GuestChatMessage.vue'));
 Vue.component('chat-log', require('./components/ChatLog.vue'));
 Vue.component('chat-composer', require('./components/ChatComposer.vue'));
 
